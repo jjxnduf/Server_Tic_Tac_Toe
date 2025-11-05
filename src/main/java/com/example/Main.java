@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -26,8 +27,8 @@ public class Main {
         G1_out.println("READY");
         G2_out.println("READY");
 
-        char[] tris = { '0', '0', '0', '0', '0', '0', '0', '0', '0' };
-
+        char[] tris = { '0', '0', '0', '0', '0', '0', '0', '0', ' ' };
+        System.out.println(printChar(tris));
         boolean gameEnded = false;
         while (!gameEnded) {
 
@@ -52,23 +53,21 @@ public class Main {
 
             celle[mossa] = numeroGiocatore.charAt(0);
             currentPlayerOut.println("OK");
-            currentPlayerOut.println(Arrays.toString(celle));
 
             char esito = Vincitore(celle);
             if (esito == '0') {
-
-                opponentOut.println(Arrays.toString(celle) + ",");
-                opponentOut.println("");
+               
+                
 
             } else if (esito == '1' || esito == '2') {
 
-                opponentOut.println(Arrays.toString(celle) + ",");
+                opponentOut.println(printChar(celle));
                 opponentOut.println(esito == '1' ? "L" : "L");
                 currentPlayerOut.println("W");
                 return true;
 
             } else {
-                opponentOut.println(Arrays.toString(celle) + ",");
+                opponentOut.println(printChar(celle));
                 opponentOut.println("P");
                 currentPlayerOut.println("P");
                 return true;
@@ -108,4 +107,16 @@ public class Main {
         // Pareggio
         return 'P';
     }
+
+    private static String printChar(char[] a) {
+        String s = "";
+        for (char c : a) {
+            s = s + c + ",";
+        }
+        return s;
+    }
 }
+
+
+     
+
